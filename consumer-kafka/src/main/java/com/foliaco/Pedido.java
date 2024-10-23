@@ -1,6 +1,5 @@
 package com.foliaco;
 
-
 public class Pedido {
     private String id;
     private String nombre;

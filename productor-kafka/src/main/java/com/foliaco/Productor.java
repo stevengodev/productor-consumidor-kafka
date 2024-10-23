@@ -28,17 +28,17 @@ public class Productor {
 
     }
 
-    public void close() {
-        this.kafkaProductor.close();
-    }
-
     public void send(String value) {
         try {
-            var record = new ProducerRecord<String, String>(TOPIC, value);
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, value);
             this.kafkaProductor.send(record);
         } catch (KafkaException e) {
             log.error(e.getMessage());
-            this.close();
+            this.kafkaProductor.close();
         }
+    }
+
+    public void flush(){
+        this.kafkaProductor.flush();
     }
 }
